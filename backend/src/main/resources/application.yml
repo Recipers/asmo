@@ -1,1 +1,40 @@
-spring.application.name=asmo
+server:
+  port: 48888
+
+spring:
+  profiles:
+    group:
+      local:
+        - common
+        - local-mysql
+        - local-redis
+
+---
+spring:
+  config:
+    activate:
+      on-profile: common
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+logging:
+  level:
+    org.springframework.web.filter: debug
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local-mysql
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:43306/asmo
+    username: root
+    password: root
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        show_sql: false
+
