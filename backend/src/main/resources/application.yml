@@ -18,6 +18,7 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: create-drop
 logging:
   level:
     org.springframework.web.filter: debug
