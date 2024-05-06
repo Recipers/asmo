@@ -40,3 +40,29 @@
 전적
 
 레이팅
+
+
+---
+
+# Backend
+
+## How to develop
+
+### Prerequisites
+
+- Java 21
+- Docker, Docker-Compose
+
+### Run
+
+1. Run docker-compose
+```shell
+docker-compose up -d
+```
+
+2. Run Spring Boot Application
+
+    2.1 macOS
+    ```shell
+    ./gradlew bootRun --args='--spring.profiles.active=local'
+    ```

@@ -1,0 +1,14 @@
+services:
+  db:
+    image: mysql:8.0.36
+    restart: always
+    environment:
+      - MYSQL_DATABASE=asmo
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - '43306:3306'
+    volumes:
+      - db:/var/lib/mysql
+volumes:
+  db:
+    driver: local
