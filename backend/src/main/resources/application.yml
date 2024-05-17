@@ -22,7 +22,8 @@ spring:
 logging:
   level:
     org.springframework.web.filter: debug
-
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss.SSSz,UTC
 ---
 spring:
   config:
