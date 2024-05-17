@@ -1,4 +1,4 @@
-package com.recipers.asmo.user.entity;
+package com.recipers.asmo.game_proposal.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,24 +14,24 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "user")
+@Table(name = "game_proposal")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class User {
+public class GameProposal {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nickname", nullable = false)
-    private String nickname;
+    @Column(name = "create_at", nullable = false)
+    private Long matchId;
 
-    @Column(name = "email", nullable = false)
-    private String email;
+    @Column(name = "create_at", nullable = false)
+    private Long teamId;
 
-    @Column(name = "password", nullable = false)
-    private String password;
+    @Column(name = "accepted")
+    private Boolean accepted;
 
     @CreationTimestamp
     @Column(name = "create_at", nullable = false)
