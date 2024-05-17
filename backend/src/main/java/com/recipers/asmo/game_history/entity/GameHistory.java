@@ -1,4 +1,4 @@
-package com.recipers.asmo.game.entity;
+package com.recipers.asmo.game_history.entity;
 
 import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,39 +14,33 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "game")
+@Table(name = "game_history")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Game {
+public class GameHistory {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title", nullable = false)
-    private String title;
+    @Column(name = "game_id", nullable = false)
+    private Long gameId;
 
-    @Column(name = "match_date", nullable = false)
-    private LocalDateTime matchDate;
+    @Column(name = "winner_team_id", nullable = false)
+    private Long winnerTeamId;
 
-    @Column(name = "region", nullable = false)
-    private String region;
+    @Column(name = "loser_team_id", nullable = false)
+    private Long loserTeamId;
 
-    @Column(name = "location", nullable = false)
-    private String location;
+    @Column(name = "winner_score", nullable = false)
+    private int winnerScore;
 
-    @Column(name = "fee", nullable = false)
-    private Integer fee;
+    @Column(name = "loser_score", nullable = false)
+    private int loserScore;
 
-    @Column(name = "description")
-    private String description;
-
-    @Column(name = "host_team_id", nullable = false)
-    private Long hostTeamId;
-
-    @Column(name = "guest_team_id")
-    private Long guestTeamId;
+    @Column(name = "is_draw", nullable = false)
+    private Boolean isDraw;
 
     @Column(name = "created_at", nullable = false)
     @CreationTimestamp
