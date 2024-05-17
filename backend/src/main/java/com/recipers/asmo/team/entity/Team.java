@@ -15,6 +15,12 @@ import java.time.LocalDateTime;
 @Getter
 public class Team {
 
+    public Team(String name, String region, String uniformColor) {
+        this.name = name;
+        this.region = region;
+        this.uniformColor = uniformColor;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,11 +40,11 @@ public class Team {
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
