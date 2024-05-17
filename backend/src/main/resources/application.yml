@@ -18,11 +18,12 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: create-drop
+      ddl-auto: create
 logging:
   level:
     org.springframework.web.filter: debug
-
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss.SSSz,UTC
 ---
 spring:
   config:
