@@ -7,7 +7,9 @@ spring:
       local:
         - common
         - local-mysql
-        - local-redis
+      prod:
+        - common
+        - prod-mysql
 
 ---
 spring:
@@ -24,6 +26,13 @@ logging:
     org.springframework.web.filter: debug
   pattern:
     dateformat: yyyy-MM-dd HH:mm:ss.SSSz,UTC
+#app:
+#  token:
+#    secretKey: asmo_secret_key
+#    accessTokenExpireSeconds: 3600000
+#    refreshTokenexpireSeconds: 3600000
+#    prefix: Bearer
+
 ---
 spring:
   config:
@@ -34,6 +43,22 @@ spring:
     url: jdbc:mysql://127.0.0.1:43306/asmo
     username: root
     password: root
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        show_sql: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod-mysql
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USR}
+    password: ${DATABASE_PASSWORD}
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:

@@ -24,10 +24,10 @@ public class GameProposal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "create_at", nullable = false)
+    @Column(name = "match_id", nullable = false)
     private Long matchId;
 
-    @Column(name = "create_at", nullable = false)
+    @Column(name = "team_id", nullable = false)
     private Long teamId;
 
     @Column(name = "accepted")
