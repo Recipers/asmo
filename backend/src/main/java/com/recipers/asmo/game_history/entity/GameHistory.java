@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +19,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class GameHistory {
+
+    @Builder
+    public GameHistory(Long gameId, Long winnerTeamId, Long loserTeamId, int winnerScore, int loserScore, Boolean isDraw) {
+        this.gameId = gameId;
+        this.winnerTeamId = winnerTeamId;
+        this.loserTeamId = loserTeamId;
+        this.winnerScore = winnerScore;
+        this.loserScore = loserScore;
+        this.isDraw = isDraw;
+    }
 
     @Id
     @Column(name = "id")
