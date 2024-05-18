@@ -25,8 +25,7 @@ public class CommonExceptionHandler {
     @ExceptionHandler(value = CommonException.class)
     private ResponseEntity<ErrorResponse> handleCommonException(CommonException e) {
         log.error("CommonException occur", e);
-        ErrorResponse response = ErrorResponse.builder()
-            .message(e.getErrorMessageCode().getErrorMessage()).build();
+        ErrorResponse response = ErrorResponse.builder().message(e.getMessage()).build();
         return ResponseEntity.status(e.getHttpStatus()).body(response);
     }
 

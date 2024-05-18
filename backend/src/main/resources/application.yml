@@ -12,7 +12,6 @@ spring:
         - prod-aws
         - prod-mysql
 
-
 ---
 spring:
   config:
@@ -27,12 +26,12 @@ logging:
     org.springframework.web.filter: debug
   pattern:
     dateformat: yyyy-MM-dd HH:mm:ss.SSSz,UTC
-#app:
-#  token:
-#    secretKey: asmo_secret_key
-#    accessTokenExpireSeconds: 3600000
-#    refreshTokenexpireSeconds: 3600000
-#    prefix: Bearer
+app:
+  token:
+    secretKey: asmo_secret_key
+    accessTokenExpireSeconds: 3600000
+    refreshTokenexpireSeconds: 3600000
+    prefix: Bearer
 
 ---
 spring:

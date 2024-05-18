@@ -1,5 +1,7 @@
 package com.recipers.asmo.user.controller;
 
+import com.recipers.asmo.auth.token.Token;
+import com.recipers.asmo.user.dto.UserSignInRequest;
 import com.recipers.asmo.user.dto.UserSignUpRequest;
 import com.recipers.asmo.user.service.UserService;
 import jakarta.validation.Valid;
@@ -25,5 +27,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @PostMapping(path = "/sign-in")
+    public ResponseEntity<Token> signIn(@RequestBody @Valid UserSignInRequest signInRequest) {
+
+        Token token = userService.singIn(signInRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(token);
+    }
 
 }

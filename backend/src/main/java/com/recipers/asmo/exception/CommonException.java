@@ -8,12 +8,12 @@ public class CommonException extends RuntimeException {
 
     private HttpStatus httpStatus;
 
-    private ErrorMessageCode errorMessageCode;
+    private String message;
 
-    public CommonException(HttpStatus httpStatus, ErrorMessageCode errorMessageCode) {
-        super(errorMessageCode.getErrorMessage());
+    public CommonException(HttpStatus httpStatus, String message) {
+        super(message);
         this.httpStatus = httpStatus;
-        this.errorMessageCode = errorMessageCode;
+        this.message = message;
     }
 
 }
