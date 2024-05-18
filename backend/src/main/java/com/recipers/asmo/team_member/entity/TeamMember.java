@@ -1,14 +1,13 @@
 package com.recipers.asmo.team_member.entity;
 
 import java.time.LocalDateTime;
+
+import com.recipers.asmo.team_member.eums.Role;
+import com.recipers.asmo.util.jpa.EnumConverters;
+import jakarta.persistence.*;
+import lombok.Builder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +17,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class TeamMember {
+
+    @Builder
+    public TeamMember(Long teamId, Long userId, Role role) {
+        this.teamId = teamId;
+        this.userId = userId;
+        this.role = role;
+    }
 
     @Id
     @Column(name = "id")
@@ -32,7 +38,8 @@ public class TeamMember {
 
     // "감독": manager | "코치": coach | "팀원": member
     @Column(name = "role", nullable = false)
-    private String role;
+    @Convert(converter= EnumConverters.RoleConverter.class)
+    private Role role;
 
     @Column(name = "created_at", nullable = false)
     @CreationTimestamp
