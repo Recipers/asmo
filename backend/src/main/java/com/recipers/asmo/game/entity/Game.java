@@ -1,23 +1,37 @@
 package com.recipers.asmo.game.entity;
 
-import java.time.LocalDateTime;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "game")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Game {
+
+    @Builder
+    public Game(String title, LocalDateTime startAt, LocalDateTime endAt, String region,
+        String location, Integer fee, String description, Long hostTeamId) {
+        this.title = title;
+        this.startAt = startAt;
+        this.endAt = endAt;
+        this.region = region;
+        this.location = location;
+        this.fee = fee;
+        this.description = description;
+        this.hostTeamId = hostTeamId;
+    }
 
     @Id
     @Column(name = "id")
@@ -27,8 +41,14 @@ public class Game {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "match_date", nullable = false)
-    private LocalDateTime matchDate;
+    @Column(name = "start_at", nullable = false)
+    private LocalDateTime startAt;
+
+    @Column(name = "end_at", nullable = false)
+    private LocalDateTime endAt;
+
+    @Column(name = "canceled", nullable = false)
+    private Boolean canceled = false;
 
     @Column(name = "region", nullable = false)
     private String region;
@@ -39,7 +59,7 @@ public class Game {
     @Column(name = "fee", nullable = false)
     private Integer fee;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
     @Column(name = "host_team_id", nullable = false)
@@ -50,11 +70,11 @@ public class Game {
 
     @Column(name = "created_at", nullable = false)
     @CreationTimestamp
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "updated_at", nullable = false)
     @UpdateTimestamp
-    private LocalDateTime updatedAt;
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;

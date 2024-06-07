@@ -14,7 +14,4 @@ public class UserSignInRequest {
     @NotEmpty
     private String password;
 
-    @NotEmpty
-    private String passwordForCheck;
-
 }

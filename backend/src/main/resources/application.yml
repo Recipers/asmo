@@ -6,9 +6,11 @@ spring:
     group:
       local:
         - common
+        - local-app
         - local-mysql
       prod:
         - common
+        - prod-app
         - prod-aws
         - prod-mysql
 
@@ -28,10 +30,18 @@ logging:
     dateformat: yyyy-MM-dd HH:mm:ss.SSSz,UTC
 app:
   token:
-    secretKey: asmo_secret_key
     accessTokenExpireSeconds: 3600000
     refreshTokenexpireSeconds: 3600000
     prefix: Bearer
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local-app
+app:
+  token:
+    secretKey: asmo_secret_key
 
 ---
 spring:
@@ -50,6 +60,15 @@ spring:
         show_sql: true
     hibernate:
       ddl-auto: update
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod-app
+app:
+  token:
+    secretKey: {ASMO_SECRET_KEY}
 
 ---
 spring:
