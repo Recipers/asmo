@@ -19,19 +19,28 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Getter
 public class GameProposal {
 
+    public GameProposal(long gameId, long teamId, String description) {
+        this.gameId = gameId;
+        this.teamId = teamId;
+        this.description = description;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "match_id", nullable = false)
-    private Long matchId;
+    @Column(name = "game_id", nullable = false)
+    private Long gameId;
 
     @Column(name = "team_id", nullable = false)
     private Long teamId;
 
-    @Column(name = "accepted")
-    private Boolean accepted;
+    @Column(name = "description", nullable = false)
+    private String description;
+
+    @Column(name = "accepted", nullable = false)
+    private Boolean accepted = false;
 
     @CreationTimestamp
     @Column(name = "create_at", nullable = false)
