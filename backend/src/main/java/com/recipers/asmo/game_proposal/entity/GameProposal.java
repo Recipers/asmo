@@ -56,4 +56,8 @@ public class GameProposal {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
+    public void accept() {
+        this.accepted = true;
+    }
+
 }

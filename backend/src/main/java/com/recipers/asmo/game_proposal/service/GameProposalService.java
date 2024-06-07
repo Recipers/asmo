@@ -14,6 +14,7 @@ import com.recipers.asmo.game_proposal.repository.GameProposalRepository;
 import com.recipers.asmo.team_member.entity.TeamMember;
 import com.recipers.asmo.team_member.eums.Role;
 import com.recipers.asmo.team_member.repository.TeamMemberRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -35,7 +36,7 @@ public class GameProposalService {
         }
 
         TeamMember teamMember = teamMemberRepository
-            .findById(userId)
+            .findByTeamIdAndUserId(gameProposalCreateRequest.getTeamId(), userId)
             .orElseThrow(() -> new CommonException(HttpStatus.FORBIDDEN, "TeamMember not found"));
 
         if (teamMember.getRole() != Role.MANAGER && teamMember.getRole() != Role.COACH) {
@@ -48,6 +49,32 @@ public class GameProposalService {
 
     public Page<GameProposal> findGameProposalsByGame(Pageable pageable, Long gameId) {
         return gameProposalRepository.findByGameId(pageable, gameId);
+    }
+
+    @Transactional
+    public void acceptGameProposal(Long userId, Long gameProposalId) {
+        GameProposal gameProposal = gameProposalRepository
+            .findById(gameProposalId)
+            .orElseThrow(() -> new CommonException(HttpStatus.NOT_FOUND, "GameProposal not found"));
+
+        Game game = gameRepository.findById(gameProposal.getGameId()).get();
+        TeamMember teamMember = teamMemberRepository.findByTeamIdAndUserId(game.getHostTeamId(), userId).orElseThrow(
+            () -> new CommonException(HttpStatus.FORBIDDEN, "You are not allowed to accept this game proposal")
+        );
+
+        if (teamMember.getRole() != Role.MANAGER && teamMember.getRole() != Role.COACH) {
+            throw new CommonException(HttpStatus.FORBIDDEN, "You are not allowed to accept this game proposal");
+        }
+
+        if (game.getGuestTeamId() != null) {
+            throw new CommonException(HttpStatus.BAD_REQUEST, "This game already has a guest team");
+        }
+
+        gameProposal.accept();
+        game.setGuestTeamId(gameProposal.getTeamId());
+
+        gameProposalRepository.save(gameProposal);
+        gameRepository.save(game);
     }
 
 }
