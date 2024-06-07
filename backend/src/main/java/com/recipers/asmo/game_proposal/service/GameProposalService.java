@@ -1,5 +1,7 @@
 package com.recipers.asmo.game_proposal.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import com.recipers.asmo.exception.CommonException;
@@ -42,6 +44,10 @@ public class GameProposalService {
 
         GameProposal gameProposal = gameProposalMapper.toGameProposal(gameProposalCreateRequest);
         gameProposalRepository.save(gameProposal);
+    }
+
+    public Page<GameProposal> findGameProposalsByGame(Pageable pageable, Long gameId) {
+        return gameProposalRepository.findByGameId(pageable, gameId);
     }
 
 }
