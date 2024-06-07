@@ -7,6 +7,7 @@ import com.recipers.asmo.util.jpa.EnumConverters;
 import jakarta.persistence.*;
 import lombok.Builder;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "team_member")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SQLDelete(sql = "UPDATE team_member SET deleted_at = NOW() WHERE id = ?")
 @Getter
 public class TeamMember {
 
