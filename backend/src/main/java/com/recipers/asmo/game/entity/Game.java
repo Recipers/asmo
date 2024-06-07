@@ -79,4 +79,8 @@ public class Game {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
+    public void setGuestTeamId(Long guestTeamId) {
+        this.guestTeamId = guestTeamId;
+    }
+
 }

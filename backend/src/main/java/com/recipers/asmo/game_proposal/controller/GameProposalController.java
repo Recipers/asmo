@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,6 +43,18 @@ public class GameProposalController {
     @GetMapping(path = "/games/{gameId}/game-proposals")
     public ResponseEntity<Page<GameProposal>> findAllGameProposals(@PageableDefault(size = 10, page = 0) Pageable pageable, @PathVariable("gameId") Long gameId) {
         return ResponseEntity.status(HttpStatus.OK).body(gameProposalService.findGameProposalsByGame(pageable, gameId));
+    }
+
+    @PutMapping(path = "/game-proposals/{gameProposalId}/accept")
+    public ResponseEntity<Void> acceptGameProposal(@PathVariable("gameProposalId") Long gameProposalId) {
+        Long userId = AsmoSession.REQUEST_SCOPE.getUserId();
+
+        if (userId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        gameProposalService.acceptGameProposal(userId, gameProposalId);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }
