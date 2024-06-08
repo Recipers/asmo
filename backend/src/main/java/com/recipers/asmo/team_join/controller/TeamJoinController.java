@@ -19,8 +19,8 @@ public class TeamJoinController {
 
     private final TeamJoinService teamJoinService;
 
-    @PostMapping("{teamId}")
-    public ResponseEntity<String> addTeamMember(@PathVariable Long teamId) {
+    @PostMapping("/{teamId}")
+    public ResponseEntity<String> addTeamMember(@PathVariable(value = "teamId") Long teamId) {
         Long requestUserId = AsmoSession.REQUEST_SCOPE.getUserId();
 
         if (requestUserId == null) {
