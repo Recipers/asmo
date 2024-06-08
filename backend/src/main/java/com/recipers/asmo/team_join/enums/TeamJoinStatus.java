@@ -1,4 +1,4 @@
-package com.recipers.asmo.team_member.eums;
+package com.recipers.asmo.team_join.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -6,11 +6,11 @@ import com.recipers.asmo.util.jpa.PersistableEnum;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public enum Role implements PersistableEnum {
+public enum TeamJoinStatus implements PersistableEnum {
 
-    MANAGER("매니저", "1"),
-    COACH("코치", "2"),
-    MEMBER("멤버", "3");
+    PENDING("대기", "1"),
+    ACCEPTED("수락", "2"),
+    REJECTED("거절", "9");
 
     private final String name;
 
@@ -23,10 +23,10 @@ public enum Role implements PersistableEnum {
     }
 
     @JsonCreator
-    public static Role of(String code) {
-        for (Role role : values()) {
-            if (role.getCode().equals(code)) {
-                return role;
+    public static TeamJoinStatus of(String code) {
+        for (TeamJoinStatus status : values()) {
+            if (status.getCode().equals(code)) {
+                return status;
             }
         }
         return null;
