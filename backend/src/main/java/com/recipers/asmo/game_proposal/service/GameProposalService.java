@@ -66,10 +66,6 @@ public class GameProposalService {
             throw new CommonException(HttpStatus.FORBIDDEN, "You are not allowed to accept this game proposal");
         }
 
-        if (game.getGuestTeamId() != null) {
-            throw new CommonException(HttpStatus.BAD_REQUEST, "This game already has a guest team");
-        }
-
         gameProposal.accept();
         game.setGuestTeamId(gameProposal.getTeamId());
 

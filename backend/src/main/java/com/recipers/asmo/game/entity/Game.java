@@ -13,6 +13,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.http.HttpStatus;
+import com.recipers.asmo.exception.CommonException;
 
 @Entity
 @Table(name = "game")
@@ -80,6 +82,10 @@ public class Game {
     private LocalDateTime deletedAt;
 
     public void setGuestTeamId(Long guestTeamId) {
+        if (this.guestTeamId != null) {
+            throw new CommonException(HttpStatus.BAD_REQUEST, "This game already has a guest team");
+        }
+
         this.guestTeamId = guestTeamId;
     }
 

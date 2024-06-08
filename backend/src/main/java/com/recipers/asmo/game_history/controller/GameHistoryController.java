@@ -8,10 +8,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.recipers.asmo.auth.interceptor.AsmoSession;
+import com.recipers.asmo.game_history.dto.GameHistoryCreateRequest;
 import com.recipers.asmo.game_history.entity.GameHistory;
 import com.recipers.asmo.game_history.service.GameHistoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -20,6 +25,20 @@ import lombok.RequiredArgsConstructor;
 public class GameHistoryController {
 
     private final GameHistoryService gameHistoryService;
+
+    @PostMapping(path = "/game-histories")
+    public ResponseEntity<Void> createGameHistory(
+        @RequestBody @Valid GameHistoryCreateRequest request
+    ) {
+        Long userId = AsmoSession.REQUEST_SCOPE.getUserId();
+
+        if (userId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        gameHistoryService.createGameHistory(userId, request);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 
     @GetMapping(path = "/game-histories/{id}")
     public ResponseEntity<GameHistory> findGameHistory(@PathVariable("id") Long id) {
