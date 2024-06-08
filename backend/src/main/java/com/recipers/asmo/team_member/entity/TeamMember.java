@@ -40,7 +40,7 @@ public class TeamMember {
 
     // "감독": manager | "코치": coach | "팀원": member
     @Column(name = "role", nullable = false)
-    @Convert(converter= EnumConverters.RoleConverter.class)
+    @Convert(converter = EnumConverters.RoleConverter.class)
     private Role role;
 
     @Column(name = "created_at", nullable = false)
@@ -53,5 +53,9 @@ public class TeamMember {
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
+
+    public void assignRole(Role role) {
+        this.role = role;
+    }
 
 }
