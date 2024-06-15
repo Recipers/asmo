@@ -44,4 +44,8 @@ public class TeamJoin {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    public void approveJoinRequest(TeamJoinStatus accepted) {
+        this.status = accepted;
+    }
+
 }
