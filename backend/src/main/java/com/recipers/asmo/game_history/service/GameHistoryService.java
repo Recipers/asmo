@@ -1,6 +1,5 @@
 package com.recipers.asmo.game_history.service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -14,8 +13,11 @@ import com.recipers.asmo.game_history.dto.GameHistoryCreateRequest;
 import com.recipers.asmo.game_history.entity.GameHistory;
 import com.recipers.asmo.game_history.mapper.GameHistoryMapper;
 import com.recipers.asmo.game_history.repository.GameHistoryRepository;
+import com.recipers.asmo.team.entity.Team;
+import com.recipers.asmo.team.repository.TeamRepository;
 import com.recipers.asmo.team_member.entity.TeamMember;
 import com.recipers.asmo.team_member.repository.TeamMemberRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -26,7 +28,9 @@ public class GameHistoryService {
     private final GameRepository gameRepository;
     private final TeamMemberRepository teamMemberRepository;
     private final GameHistoryMapper gameHistoryMapper;
+    private final TeamRepository teamRepository;
 
+    @Transactional
     public void createGameHistory(Long userId, GameHistoryCreateRequest request) {
         Game game = gameRepository.findById(request.getGameId())
             .orElseThrow(() -> new CommonException(HttpStatus.NOT_FOUND, "Game not found"));
@@ -63,7 +67,15 @@ public class GameHistoryService {
         }
 
         GameHistory gameHistory = gameHistoryMapper.toGameHistory(request);
+        Team winnerTeam = teamRepository.findById(request.getWinnerTeamId()).get();
+        Team loserTeam = teamRepository.findById(request.getLoserTeamId()).get();
+
+        winnerTeam.win();
+        loserTeam.lose();
+
         gameHistoryRepository.save(gameHistory);
+        teamRepository.save(winnerTeam);
+        teamRepository.save(loserTeam);
     }
 
     public Optional<GameHistory> findGameHistory(Long id) {
