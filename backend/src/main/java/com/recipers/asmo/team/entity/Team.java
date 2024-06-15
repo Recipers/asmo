@@ -49,4 +49,12 @@ public class Team {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
+    public void win() {
+        mmr += 10;
+    }
+
+    public void lose() {
+        mmr -= 10;
+    }
+
 }
