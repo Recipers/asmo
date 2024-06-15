@@ -30,4 +30,17 @@ public class TeamJoinController {
         teamJoinService.addTeamMember(requestUserId, teamId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+    @PostMapping("/accept/{userId}")
+    public ResponseEntity<String> acceptTeamJoinRequest(@PathVariable("userId") Long userId) {
+        Long requestUserId = AsmoSession.REQUEST_SCOPE.getUserId();
+
+        if (requestUserId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        }
+
+        teamJoinService.acceptTeamJoinRequest(requestUserId, userId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 }
