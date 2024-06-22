@@ -8,6 +8,7 @@ import com.recipers.asmo.user.dto.UserSignUpRequest;
 import com.recipers.asmo.user.entity.User;
 import com.recipers.asmo.user.mapper.UserMapper;
 import com.recipers.asmo.user.repository.UserRepository;
+import com.recipers.asmo.util.secret.SecretUtil;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,7 @@ public class UserService {
         });
         equalsPassword(userSignUpRequest.getPassword(), userSignUpRequest.getPasswordForCheck());
         User user = userMapper.toUserFromSignUpRequest(userSignUpRequest);
+        user.encryptPassword();
         return userRepository.save(user);
     }
 
@@ -37,7 +39,7 @@ public class UserService {
 
         User user = userRepository.findByEmail(userSignInRequest.getEmail())
             .orElseThrow(() -> new CommonException(HttpStatus.NOT_FOUND, ""));
-        equalsPassword(userSignInRequest.getPassword(), user.getPassword());
+        checkPassword(user, userSignInRequest.getPassword());
         return tokenProvider.issueToken(userMapper.asClaimFromUserEntity(user));
     }
 
@@ -50,6 +52,13 @@ public class UserService {
         User user = userRepository.findById(beforeUserId.get())
             .orElseThrow(() -> new CommonException(HttpStatus.NOT_FOUND, ""));
         return tokenProvider.issueToken(userMapper.asClaimFromUserEntity(user));
+    }
+
+    private void checkPassword(User user, String password) {
+
+        if (!SecretUtil.matches(password, user.getPassword())) {
+            throw new CommonException(HttpStatus.BAD_REQUEST, "");
+        }
     }
 
     private void equalsPassword(String inputPassword, String entityPassword) {

@@ -1,5 +1,6 @@
 package com.recipers.asmo.user.entity;
 
+import com.recipers.asmo.util.secret.SecretUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -54,6 +55,10 @@ public class User {
 
     public void delete() {
         this.deletedAt = LocalDateTime.now();
+    }
+
+    public void encryptPassword() {
+        this.password = SecretUtil.encryptPassword(this.password);
     }
 
 }
