@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT_PATH="/home/ubuntu/spring-github-action"
+ROOT_PATH="/home/ec2-user/asmo"
 JAR="$ROOT_PATH/application.jar"
 STOP_LOG="$ROOT_PATH/stop.log"
 SERVICE_PID=$(pgrep -f $JAR) # 실행중인 Spring 서버의 PID
