@@ -3,13 +3,8 @@ os: linux
 
 files:
   - source:  /
-    destination: /home/ubuntu/spring-github-action
+    destination: /home/ec2-user/asmo
     overwrite: yes
-
-permissions:
-  - object: /
-    owner: ubuntu
-    group: ubuntu
 
 hooks:
   AfterInstall:
