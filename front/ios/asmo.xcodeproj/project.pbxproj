@@ -12,6 +12,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		32DE0F15B1EB4783085BAECE /* libPods-asmo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58537F1E3E799E8E4B03676D /* libPods-asmo.a */; };
+		37352E442C6F8A9500116AF4 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37352E432C6F8A9500116AF4 /* Feather.ttf */; };
 		42C6A5963AEF2C16A3C73E73 /* libPods-asmo-asmoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AACEC3F6EC651C6F2C7E7166 /* libPods-asmo-asmoTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = asmo/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = asmo/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = asmo/main.m; sourceTree = "<group>"; };
+		37352E432C6F8A9500116AF4 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		58537F1E3E799E8E4B03676D /* libPods-asmo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-asmo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BF72C92D2DD963A67CCE163 /* Pods-asmo-asmoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-asmo-asmoTests.debug.xcconfig"; path = "Target Support Files/Pods-asmo-asmoTests/Pods-asmo-asmoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = asmo/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 		13B07FAE1A68108700A75B9A /* asmo */ = {
 			isa = PBXGroup;
 			children = (
+				37352E422C6F8A7D00116AF4 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -104,6 +107,14 @@
 				AACEC3F6EC651C6F2C7E7166 /* libPods-asmo-asmoTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		37352E422C6F8A7D00116AF4 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				37352E432C6F8A9500116AF4 /* Feather.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -244,6 +255,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				37352E442C6F8A9500116AF4 /* Feather.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
