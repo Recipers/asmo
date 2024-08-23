@@ -1,4 +1,4 @@
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
   Button,
@@ -9,7 +9,8 @@ import {
   View,
 } from 'react-native';
 import AuthHomeScreen from './src/screens/AuthHomeScreen';
-import AuthStackNavigator from './src/navigation/AuthStackNavigator';
+import AuthStackNavigator from './src/navigations/AuthStackNavigator';
+import Footer from './src/navigations/Footer';
 
 function App() {
   const [name, setName] = useState('');
@@ -20,9 +21,12 @@ function App() {
   };
 
   return (
-    <NavigationContainer>
-      <AuthStackNavigator />
-    </NavigationContainer>
+    <SafeAreaView style={styles.container}>
+      <NavigationContainer>
+        <AuthStackNavigator />
+        <Footer />
+      </NavigationContainer>
+    </SafeAreaView>
   );
 }
 
