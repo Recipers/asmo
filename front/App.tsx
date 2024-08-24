@@ -11,6 +11,7 @@ import {
 import AuthHomeScreen from './src/screens/AuthHomeScreen';
 import AuthStackNavigator from './src/navigations/AuthStackNavigator';
 import Footer from './src/navigations/Footer';
+import HomeScreen from './src/screens/HomeScreen';
 
 function App() {
   const [name, setName] = useState('');
@@ -23,7 +24,8 @@ function App() {
   return (
     <SafeAreaView style={styles.container}>
       <NavigationContainer>
-        <AuthStackNavigator />
+        {/*<AuthStackNavigator />*/}
+        <HomeScreen />
         <Footer />
       </NavigationContainer>
     </SafeAreaView>
