@@ -1,53 +1,55 @@
 import {NavigationContainer} from '@react-navigation/native';
-import React, {useState} from 'react';
-import {
-  Button,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
-import AuthHomeScreen from './src/screens/AuthHomeScreen';
-import AuthStackNavigator from './src/navigations/AuthStackNavigator';
-import Footer from './src/navigations/Footer';
-import HomeScreen from './src/screens/HomeScreen';
+import React from 'react';
+import {QueryClientProvider} from '@tanstack/react-query';
+import RootNavigator from './src/navigations/root/RootNavigator';
+import {colors} from '@/constants';
+import queryClient from './src/api/queryClient';
+import {removeEncryptStorage} from '@/utils/encryptStorage';
+import {storageKeys} from '@/constants';
+import Toast, {
+  BaseToast,
+  BaseToastProps,
+  ErrorToast,
+} from 'react-native-toast-message';
+
+removeEncryptStorage(storageKeys.REFRESH_TOKEN);
+
+const toastConfig = {
+  success: (props: BaseToastProps) => (
+    <BaseToast
+      {...props}
+      style={{borderLeftColor: colors.BLUE_500}}
+      text1Style={{
+        fontSize: 14,
+      }}
+      text2Style={{
+        fontSize: 12,
+      }}
+    />
+  ),
+  error: (props: BaseToastProps) => (
+    <ErrorToast
+      {...props}
+      style={{borderLeftColor: colors.RED_500}}
+      text1Style={{
+        fontSize: 14,
+      }}
+      text2Style={{
+        fontSize: 12,
+      }}
+    />
+  ),
+};
 
 function App() {
-  const [name, setName] = useState('');
-
-  const handleChangeInput = (text: string) => {
-    console.log(text);
-    setName(text);
-  };
-
   return (
-    <SafeAreaView style={styles.container}>
+    <QueryClientProvider client={queryClient}>
       <NavigationContainer>
-        {/*<AuthStackNavigator />*/}
-        <HomeScreen />
-        <Footer />
+        <RootNavigator />
+        <Toast config={toastConfig} />
       </NavigationContainer>
-    </SafeAreaView>
+    </QueryClientProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  input: {
-    flex: 1,
-    borderWidth: 2,
-    borderColor: 'black',
-    height: 50,
-    width: 100,
-  },
-  inputContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-});
 
 export default App;

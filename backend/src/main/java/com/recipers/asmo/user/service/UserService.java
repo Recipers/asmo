@@ -35,6 +35,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User findUser(Long userId) {
+        return userRepository.findById(userId)
+            .orElseThrow(() -> new CommonException(HttpStatus.NOT_FOUND, ""));
+    }
+
     public Token singIn(UserSignInRequest userSignInRequest) {
 
         User user = userRepository.findByEmail(userSignInRequest.getEmail())
@@ -43,9 +48,9 @@ public class UserService {
         return tokenProvider.issueToken(userMapper.asClaimFromUserEntity(user));
     }
 
-    public Token refresh(Token tokenDto) {
+    public Token refresh(String bearerToken) {
 
-        Optional<Long> beforeUserId = tokenProvider.validateToken(tokenDto.getRefreshToken());
+        Optional<Long> beforeUserId = tokenProvider.validateToken(bearerToken);
         if (beforeUserId.isEmpty()) {
             throw new CommonException(HttpStatus.BAD_REQUEST, "");
         }
