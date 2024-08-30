@@ -43,6 +43,9 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = asmo/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		887A48BCC1178AB4FFC52824 /* Pods-asmo-asmoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-asmo-asmoTests.release.xcconfig"; path = "Target Support Files/Pods-asmo-asmoTests/Pods-asmo-asmoTests.release.xcconfig"; sourceTree = "<group>"; };
 		AACEC3F6EC651C6F2C7E7166 /* libPods-asmo-asmoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-asmo-asmoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC6D59412C79058800B9C3C8 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		CC6D59422C7905A200B9C3C8 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		CC6D59432C7905BC00B9C3C8 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		DCBAD5F4480C8F93704EBC86 /* Pods-asmo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-asmo.release.xcconfig"; path = "Target Support Files/Pods-asmo/Pods-asmo.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FC4D4012742040985DC3C941 /* Pods-asmo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-asmo.debug.xcconfig"; path = "Target Support Files/Pods-asmo/Pods-asmo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -112,6 +115,9 @@
 		37352E422C6F8A7D00116AF4 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				CC6D59432C7905BC00B9C3C8 /* Octicons.ttf */,
+				CC6D59422C7905A200B9C3C8 /* MaterialIcons.ttf */,
+				CC6D59412C79058800B9C3C8 /* Ionicons.ttf */,
 				37352E432C6F8A9500116AF4 /* Feather.ttf */,
 			);
 			name = Fonts;
