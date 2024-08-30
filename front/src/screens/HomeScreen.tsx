@@ -15,7 +15,6 @@ import {
 import ScrollView = Animated.ScrollView;
 import * as url from 'node:url';
 import {StyleSheet} from 'react-native';
-import Footer from '@/navigations/Footer';
 // import MatchScreen from '@/screens/auth/MatchScreen';
 
 type Team = {
@@ -163,7 +162,6 @@ function HomeScreen() {
           <Text>MMR: {item.MMR}</Text>
         </View>
       ))}
-      <Footer />
     </ScrollView>
   );
 }

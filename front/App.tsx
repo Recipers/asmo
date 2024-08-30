@@ -11,6 +11,7 @@ import Toast, {
   BaseToastProps,
   ErrorToast,
 } from 'react-native-toast-message';
+import BottomTabNavigation from './src/navigations/BottomTabNavigation';
 
 removeEncryptStorage(storageKeys.REFRESH_TOKEN);
 
@@ -45,8 +46,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
-        <RootNavigator />
+        {/* <RootNavigator /> */}
         <Toast config={toastConfig} />
+        <BottomTabNavigation />
       </NavigationContainer>
     </QueryClientProvider>
   );

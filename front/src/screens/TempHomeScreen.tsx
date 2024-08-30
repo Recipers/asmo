@@ -1,6 +1,5 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, View, Image, Dimensions} from 'react-native';
-import Footer from '@/navigations/Footer';
 
 function TempHomeScreen() {
   return (
@@ -12,7 +11,6 @@ function TempHomeScreen() {
           source={require('@/assets/asmo.png')}
         />
       </View>
-      <Footer />
     </SafeAreaView>
   );
 }
