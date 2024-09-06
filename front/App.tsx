@@ -11,7 +11,10 @@ import Toast, {
   BaseToastProps,
   ErrorToast,
 } from 'react-native-toast-message';
-import BottomTabNavigation from './src/navigations/BottomTabNavigation';
+import MainTabNavigation from '@/navigations/MainTabNavigation';
+import TestScreen from '@/screens/TestScreen';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {StatusBar} from 'react-native';
 
 removeEncryptStorage(storageKeys.REFRESH_TOKEN);
 
@@ -44,13 +47,16 @@ const toastConfig = {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <NavigationContainer>
-        {/* <RootNavigator /> */}
-        <Toast config={toastConfig} />
-        <BottomTabNavigation />
-      </NavigationContainer>
-    </QueryClientProvider>
+    <GestureHandlerRootView>
+      <QueryClientProvider client={queryClient}>
+        <NavigationContainer>
+          {/*<TestScreen />*/}
+          <RootNavigator />
+          {/*<Toast config={toastConfig} />*/}
+          {/*<BottomTabNavigation />*/}
+        </NavigationContainer>
+      </QueryClientProvider>
+    </GestureHandlerRootView>
   );
 }
 
