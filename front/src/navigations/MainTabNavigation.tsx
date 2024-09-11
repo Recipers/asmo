@@ -1,5 +1,5 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import React from 'react';
+import React, {useState} from 'react';
 import {View, TouchableOpacity, StyleSheet, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import HomeScreen from '../screens/HomeScreen';
@@ -12,6 +12,8 @@ import {
 } from '@react-navigation/native';
 import HeaderLeft from '@/components/common/HeaderLeft';
 import TempHomeScreen from '@/screens/TempHomeScreen';
+import Toast from 'react-native-toast-message';
+import CreateOrJoinTeamModal from '@/screens/Team/CreateOrJoinTeamModal';
 
 function UserScreen() {
   return (
@@ -85,59 +87,81 @@ function TabBarIcons(route: RouteProp<ParamListBase>, focused: boolean) {
 }
 
 function MainTabNavigation() {
+  const [isModalVisible, setModalVisible] = useState(false);
+
   return (
-    <Tab.Navigator
-      screenOptions={({route}) => ({
-        headerStyle: {
-          backgroundColor: '#ffffff',
-          shadowColor: '#e0e0e0',
-        },
-        headerTitleStyle: {
-          fontSize: 15,
-        },
-        headerTintColor: '#000000',
-        tabBarShowLabel: false,
-        tabBarActiveTintColor: '#5200ec',
-        tabBarStyle: {
-          backgroundColor: '#ffffff',
-          borderTopColor: '#e0e0e0',
-          borderTopWidth: StyleSheet.hairlineWidth,
-        },
-        tabBarIcon: ({focused}) => TabBarIcons(route, focused),
-      })}>
-      <Tab.Screen
-        name={bottomTabNavigations.MAIN_HOME}
-        component={HomeScreen}
-        options={({navigation}) => ({
-          headerTitle: '홈',
-          // headerLeft: () => HeaderLeft(navigation),
-        })}
+    <>
+      <Tab.Navigator
+        screenOptions={({route}) => ({
+          headerStyle: {
+            backgroundColor: '#ffffff',
+            shadowColor: '#e0e0e0',
+          },
+          headerTitleStyle: {
+            fontSize: 15,
+          },
+          headerTintColor: '#000000',
+          tabBarShowLabel: false,
+          tabBarActiveTintColor: '#5200ec',
+          tabBarStyle: {
+            backgroundColor: '#ffffff',
+            borderTopColor: '#e0e0e0',
+            borderTopWidth: StyleSheet.hairlineWidth,
+          },
+          tabBarIcon: ({focused}) => TabBarIcons(route, focused),
+        })}>
+        <Tab.Screen
+          name={bottomTabNavigations.MAIN_HOME}
+          component={HomeScreen}
+          options={({navigation}) => ({
+            headerTitle: '홈',
+            // headerLeft: () => HeaderLeft(navigation),
+          })}
+        />
+        <Tab.Screen
+          name={bottomTabNavigations.MAIN_CALENDAR}
+          component={CalendarScreen}
+          options={({navigation}) => ({
+            headerTitle: '일정',
+            // headerLeft: () => HeaderLeft(navigation),
+          })}
+        />
+        <Tab.Screen
+          name={bottomTabNavigations.MAIN_TEAM}
+          component={TestScreen}
+          options={({navigation}) => ({
+            headerTitle: '팀 정보',
+            // headerLeft: () => HeaderLeft(navigation),
+          })}
+          listeners={({navigation}) => ({
+            tabPress: async e => {
+              e.preventDefault(); // 바텀 탭 이벤트 비활성화
+
+              // TODO: 팀 가입 여부 API 호출
+              const isUserJoinedTeam: boolean = await false; // 실제 API 호출 필요
+
+              if (!isUserJoinedTeam) {
+                setModalVisible(true);
+                return;
+              }
+              navigation.navigate(bottomTabNavigations.MAIN_TEAM);
+            },
+          })}
+        />
+        <Tab.Screen
+          name={bottomTabNavigations.MAIN_USER}
+          component={UserScreen}
+          options={({navigation}) => ({
+            headerTitle: '내 정보',
+            // headerLeft: () => HeaderLeft(navigation),
+          })}
+        />
+      </Tab.Navigator>
+      <CreateOrJoinTeamModal
+        visible={isModalVisible}
+        onClose={() => setModalVisible(false)}
       />
-      <Tab.Screen
-        name={bottomTabNavigations.MAIN_CALENDAR}
-        component={CalendarScreen}
-        options={({navigation}) => ({
-          headerTitle: '일정',
-          // headerLeft: () => HeaderLeft(navigation),
-        })}
-      />
-      <Tab.Screen
-        name={bottomTabNavigations.MAIN_TEAM}
-        component={TestScreen}
-        options={({navigation}) => ({
-          headerTitle: '팀 정보',
-          // headerLeft: () => HeaderLeft(navigation),
-        })}
-      />
-      <Tab.Screen
-        name={bottomTabNavigations.MAIN_USER}
-        component={UserScreen}
-        options={({navigation}) => ({
-          headerTitle: '내 정보',
-          // headerLeft: () => HeaderLeft(navigation),
-        })}
-      />
-    </Tab.Navigator>
+    </>
   );
 }
 
