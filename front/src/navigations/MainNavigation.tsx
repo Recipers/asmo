@@ -14,6 +14,8 @@ import HeaderLeft from '@/components/common/HeaderLeft';
 import TempHomeScreen from '@/screens/TempHomeScreen';
 import Toast from 'react-native-toast-message';
 import CreateOrJoinTeamModal from '@/screens/Team/CreateOrJoinTeamModal';
+import {createStackNavigator} from '@react-navigation/stack';
+import GameDetailScreen from '../screens/Game/GameDetailScreen';
 
 function UserScreen() {
   return (
@@ -167,4 +169,23 @@ function MainTabNavigation() {
 
 const styles = StyleSheet.create({});
 
-export default MainTabNavigation;
+const Stack = createStackNavigator();
+
+function MainNavigation() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="MainTab"
+        component={MainTabNavigation}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="GameDetailScreen"
+        component={GameDetailScreen}
+        options={{title: '게임 상세 정보'}}
+      />
+    </Stack.Navigator>
+  );
+}
+
+export default MainNavigation;

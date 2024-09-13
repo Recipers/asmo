@@ -1,4 +1,4 @@
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import RootNavigator from './src/navigations/root/RootNavigator';
 import {QueryClientProvider} from '@tanstack/react-query';
@@ -10,6 +10,7 @@ import {
   Image,
   SafeAreaView,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import ScrollView = Animated.ScrollView;
@@ -17,13 +18,13 @@ import * as url from 'node:url';
 import {StyleSheet} from 'react-native';
 // import MatchScreen from '@/screens/auth/MatchScreen';
 
-type Team = {
+type Game = {
   team_id: number;
   team_name: string;
   MMR: number;
 };
 
-const mockData: Team[] = [
+const mockData: Game[] = [
   {
     team_id: 1,
     team_name: '워프',
@@ -153,14 +154,23 @@ const logo = {
 };
 
 function HomeScreen() {
+  const navigation = useNavigation();
+
+  const handleTeamPress = (game: Game) => {
+    navigation.navigate('GameDetailScreen', {game});
+  };
+
   return (
     <ScrollView>
-      {mockData.map((item: Team, index: number) => (
-        <View key={index} style={styles.boardList}>
+      {mockData.map((item: Game, index: number) => (
+        <TouchableOpacity
+          key={index}
+          style={styles.boardList}
+          onPress={() => handleTeamPress(item)}>
           <Image source={logo} />
           <Text>팀명: {item.team_name}</Text>
           <Text>MMR: {item.MMR}</Text>
-        </View>
+        </TouchableOpacity>
       ))}
     </ScrollView>
   );
