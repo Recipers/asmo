@@ -1,10 +1,9 @@
 import RetryErrorBoundary from '@/components/common/RetryErrorBoundary';
-import MainHomeNavigator from '../home/MainHomeNavigator';
 import AuthStackNavigator from '../stack/AuthStackNavigator';
 import useAuth from '@/hooks/queries/useAuth';
 import {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import MainTabNavigation from '@/navigations/MainTabNavigation';
+import MainNavigation from '../MainNavigation';
 
 function RootNavigator() {
   // const {isLogin, isLoginLoading} = useAuth();
@@ -21,7 +20,7 @@ function RootNavigator() {
 
   return (
     <RetryErrorBoundary>
-      {isLogin ? <MainTabNavigation /> : <AuthStackNavigator />}
+      {isLogin ? <MainNavigation /> : <AuthStackNavigator />}
     </RetryErrorBoundary>
   );
 }

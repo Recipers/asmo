@@ -11,7 +11,7 @@ import Toast, {
   BaseToastProps,
   ErrorToast,
 } from 'react-native-toast-message';
-import MainTabNavigation from '@/navigations/MainTabNavigation';
+import MainNavigation from '@/navigations/MainTabNavigation';
 import TestScreen from '@/screens/TestScreen';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {StatusBar} from 'react-native';
