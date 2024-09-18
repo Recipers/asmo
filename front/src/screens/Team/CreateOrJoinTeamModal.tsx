@@ -7,9 +7,13 @@ import {
   TouchableOpacity,
   StyleSheet,
   TouchableWithoutFeedback,
+  Pressable,
 } from 'react-native';
 import CustomButton from '@/components/common/CustomButton';
 import {colors} from '@/constants';
+import {useNavigation} from '@react-navigation/native';
+import createTeamScreen from '@/screens/Team/CreateTeamScreen';
+import {opacity} from 'react-native-reanimated/lib/typescript/Colors';
 
 interface CreateOrJoinTeamModalProps {
   visible: boolean;
@@ -18,6 +22,8 @@ interface CreateOrJoinTeamModalProps {
 
 // TODO: color 부분 상수 폴더로 리팩터링 필요
 function CreateOrJoinTeamModal({visible, onClose}: CreateOrJoinTeamModalProps) {
+  const navigation = useNavigation();
+
   return (
     <Modal
       animationType="none"
@@ -36,12 +42,20 @@ function CreateOrJoinTeamModal({visible, onClose}: CreateOrJoinTeamModalProps) {
               <View style={styles.buttonContainer}>
                 <CustomButton
                   label={'팀 찾기'}
+                  variant={'outlined'}
                   style={[styles.button, styles.findButton]}
                   textStyle={{color: 'gray'}} // 텍스트 스타일 커스터마이징
                 />
                 <CustomButton
                   label={'팀 생성하기'}
+                  variant={'outlined'}
                   style={[styles.button, styles.createButton]}
+                  textStyle={{color: 'white'}}
+                  onPress={() => {
+                    // TODO: CreateTeamScreen 네비게이션 타입 지정 필요
+                    navigation.navigate('CreateTeamScreen');
+                    onClose();
+                  }}
                 />
               </View>
             </View>
@@ -103,10 +117,6 @@ const styles = StyleSheet.create({
   },
   createButton: {
     backgroundColor: 'purple',
-  },
-  closeButton: {
-    marginTop: 20,
-    width: '100%',
   },
 });
 

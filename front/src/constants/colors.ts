@@ -1,7 +1,7 @@
 const common = {
   PURPLE_200: '#882791',
   PURPLE_400: '#882791',
-  PURPLE_500: '#882791',
+  PURPLE_500: '#b858c1',
   PURPLE_700: '#882791',
   BLUE_500: '#0D8AFF',
   RED_500: '#FF5F5F',
