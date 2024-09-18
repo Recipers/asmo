@@ -16,6 +16,7 @@ import Toast from 'react-native-toast-message';
 import CreateOrJoinTeamModal from '@/screens/Team/CreateOrJoinTeamModal';
 import {createStackNavigator} from '@react-navigation/stack';
 import GameDetailScreen from '../screens/Game/GameDetailScreen';
+import CreateTeamScreen from '@/screens/Team/CreateTeamScreen';
 
 function UserScreen() {
   return (
@@ -183,6 +184,11 @@ function MainNavigation() {
         name="GameDetailScreen"
         component={GameDetailScreen}
         options={{title: '게임 상세 정보'}}
+      />
+      <Stack.Screen
+        name="CreateTeamScreen"
+        component={CreateTeamScreen}
+        options={{title: '팀 만들기'}}
       />
     </Stack.Navigator>
   );
