@@ -188,7 +188,7 @@ function MainNavigation() {
       <Stack.Screen
         name="CreateTeamScreen"
         component={CreateTeamScreen}
-        options={{title: '팀 만들기'}}
+        options={{title: '팀 만들기', headerBackTitleVisible: false}}
       />
     </Stack.Navigator>
   );
