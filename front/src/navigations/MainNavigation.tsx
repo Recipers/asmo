@@ -13,10 +13,11 @@ import {
 import HeaderLeft from '@/components/common/HeaderLeft';
 import TempHomeScreen from '@/screens/TempHomeScreen';
 import Toast from 'react-native-toast-message';
-import CreateOrJoinTeamModal from '@/screens/Team/CreateOrJoinTeamModal';
+import CreateOrJoinTeamModal from '@/screens/team/CreateOrJoinTeamModal';
 import {createStackNavigator} from '@react-navigation/stack';
 import GameDetailScreen from '../screens/Game/GameDetailScreen';
-import CreateTeamScreen from '@/screens/Team/CreateTeamScreen';
+import CreateTeamScreen from '@/screens/team/CreateTeamScreen';
+import SearchTeamScreen from '@/screens/team/SearchTeamScreen';
 
 function UserScreen() {
   return (
@@ -189,6 +190,11 @@ function MainNavigation() {
         name="CreateTeamScreen"
         component={CreateTeamScreen}
         options={{title: '팀 만들기', headerBackTitleVisible: false}}
+      />
+      <Stack.Screen
+        name={'SearchTeamScreen'}
+        component={SearchTeamScreen}
+        options={{title: '팀 찾기', headerBackTitleVisible: false}}
       />
     </Stack.Navigator>
   );
