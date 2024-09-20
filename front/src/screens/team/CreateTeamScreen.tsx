@@ -9,9 +9,9 @@ import {
   Platform,
   Keyboard,
   TouchableWithoutFeedback,
+  Alert,
 } from 'react-native';
-import {PanGestureHandler, State} from 'react-native-gesture-handler';
-import {alerts} from '@/constants';
+import {PanGestureHandler} from 'react-native-gesture-handler';
 
 function CreateTeamScreen({navigation}) {
   const [step, setStep] = useState(1);
@@ -35,7 +35,7 @@ function CreateTeamScreen({navigation}) {
     console.log('유니폼 색상', colorsSelected.map(c => c).join(', '));
 
     // TODO: 팀 생성 API 호출
-    alert('팀이 생성되었습니다!');
+    Alert.alert('팀이 생성되었습니다!');
     // navigation.goBack(); // TODO: 생성된 팀 화면으로 이동
   };
 

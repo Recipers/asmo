@@ -12,7 +12,7 @@ import {
 import CustomButton from '@/components/common/CustomButton';
 import {colors} from '@/constants';
 import {useNavigation} from '@react-navigation/native';
-import createTeamScreen from '@/screens/Team/CreateTeamScreen';
+import createTeamScreen from '@/screens/team/CreateTeamScreen';
 import {opacity} from 'react-native-reanimated/lib/typescript/Colors';
 
 interface CreateOrJoinTeamModalProps {
@@ -45,6 +45,10 @@ function CreateOrJoinTeamModal({visible, onClose}: CreateOrJoinTeamModalProps) {
                   variant={'outlined'}
                   style={[styles.button, styles.findButton]}
                   textStyle={{color: 'gray'}} // 텍스트 스타일 커스터마이징
+                  onPress={() => {
+                    navigation.navigate('SearchTeamScreen');
+                    onClose();
+                  }}
                 />
                 <CustomButton
                   label={'팀 생성하기'}
