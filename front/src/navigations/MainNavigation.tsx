@@ -18,6 +18,7 @@ import GameDetailScreen from '../screens/Game/GameDetailScreen';
 import CreateTeamScreen from '@/screens/team/CreateTeamScreen';
 import SearchTeamScreen from '@/screens/team/SearchTeamScreen';
 import GameMakeScreen from '@/screens/Game/GameMakeScreen';
+import TeamDetailScreen from '@/screens/team/TeamDetailScreen';
 
 function UserScreen() {
   return (
@@ -200,6 +201,11 @@ function MainNavigation() {
         name="GameMakeScreen"
         component={GameMakeScreen}
         options={{title: '게임 만들기', headerBackTitleVisible: false}}
+      />
+      <Stack.Screen
+        name="TeamDetailScreen}"
+        component={TeamDetailScreen}
+        options={{title: '팀 상세보기', headerBackTitleVisible: false}}
       />
     </Stack.Navigator>
   );

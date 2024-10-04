@@ -9,6 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import InputField from '@/components/common/InputField';
+import {useNavigation} from '@react-navigation/native';
 
 type Team = {
   team_id: number;
@@ -43,6 +44,7 @@ const FindTeamScreen = () => {
   const [teams, setTeams] = useState<Team[]>([]);
   const [searchText, setSearchText] = useState('');
   const [appliedTeams, setAppliedTeams] = useState<number[]>([]); // 신청한 팀 목록
+  const navigation = useNavigation();
 
   useEffect(() => {
     fetchTeams();
@@ -76,6 +78,11 @@ const FindTeamScreen = () => {
     team.team_name.toLowerCase().includes(searchText.toLowerCase()),
   );
 
+  const handleTeamDetail = (team: Team) => {
+    console.log('팀 디테일 핸들러 클릭');
+    navigation.navigate('TeamDetailScreen}', team);
+  };
+
   return (
     <View style={{flex: 1, padding: 16}}>
       {/* TODO: 팀 검색 API 호출*/}
@@ -100,45 +107,49 @@ const FindTeamScreen = () => {
         renderItem={({item}) => {
           const isApplied = appliedTeams.includes(item.team_id);
           return (
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                padding: 8,
-                borderBottomWidth: 1,
-                borderColor: '#ccc',
-                justifyContent: 'space-between',
-              }}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Image
-                  source={{uri: item.image_url}}
-                  style={{
-                    width: 50,
-                    height: 50,
-                    borderRadius: 25,
-                    marginRight: 16,
-                  }}
-                />
-                <View>
-                  <Text style={{fontSize: 16}}>{item.team_name}</Text>
-                  <Text style={{color: 'gray'}}>MMR: {item.MMR}</Text>
-                </View>
-              </View>
-
-              <TouchableOpacity
-                onPress={() => handleApply(item)}
-                disabled={isApplied}
+            <TouchableOpacity
+              key={item.team_id}
+              onPress={() => handleTeamDetail(item)}>
+              <View
                 style={{
-                  backgroundColor: isApplied ? 'gray' : '#882791',
-                  paddingVertical: 6,
-                  paddingHorizontal: 10,
-                  borderRadius: 4,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  padding: 8,
+                  borderBottomWidth: 1,
+                  borderColor: '#ccc',
+                  justifyContent: 'space-between',
                 }}>
-                <Text style={{color: '#fff'}}>
-                  {isApplied ? '신청 완료' : '가입 신청'}
-                </Text>
-              </TouchableOpacity>
-            </View>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Image
+                    source={{uri: item.image_url}}
+                    style={{
+                      width: 50,
+                      height: 50,
+                      borderRadius: 25,
+                      marginRight: 16,
+                    }}
+                  />
+                  <View>
+                    <Text style={{fontSize: 16}}>{item.team_name}</Text>
+                    <Text style={{color: 'gray'}}>MMR: {item.MMR}</Text>
+                  </View>
+                </View>
+
+                <TouchableOpacity
+                  onPress={() => handleApply(item)}
+                  disabled={isApplied}
+                  style={{
+                    backgroundColor: isApplied ? 'gray' : '#882791',
+                    paddingVertical: 6,
+                    paddingHorizontal: 10,
+                    borderRadius: 4,
+                  }}>
+                  <Text style={{color: '#fff'}}>
+                    {isApplied ? '신청 완료' : '가입 신청'}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
           );
         }}
       />
