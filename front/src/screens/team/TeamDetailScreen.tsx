@@ -115,8 +115,8 @@ function TeamDetailScreen(props) {
       {/* 하단 고정 버튼 */}
       <View style={styles.buttonContainer}>
         <CustomButton
-          label="신청하기"
-          onPress={() => console.log('신청하기 버튼 클릭')}
+          label="가입하기"
+          onPress={() => console.log('가입하기 버튼 클릭')}
         />
       </View>
     </View>
