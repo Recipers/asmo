@@ -1,23 +1,12 @@
-import {NavigationContainer, useNavigation} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
-import RootNavigator from './src/navigations/root/RootNavigator';
-import {QueryClientProvider} from '@tanstack/react-query';
-import queryClient from './src/api/queryClient';
-import {
-  ActivityIndicator,
-  Animated,
-  Button,
-  Image,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import ScrollView = Animated.ScrollView;
-import * as url from 'node:url';
-import {StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {Image, Text, View} from 'react-native';
+import {colors} from '@/constants';
 import {FlatList} from 'react-native';
-// import MatchScreen from '@/screens/auth/MatchScreen';
+import {StyleSheet, TouchableOpacity, Pressable} from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import useModal from '@/hooks/useModal';
+import GameMakeConfirmModal from '@/screens/Game/GameMakeConfirmModal';
 
 type Game = {
   team_id: number;
@@ -154,27 +143,40 @@ const logo = {
   height: 64,
 };
 
-function HomeScreen() {
+function GameScreen() {
+  const gameMakeConfirmModal = useModal();
   const navigation = useNavigation();
-
   const handleTeamPress = (game: Game) => {
     navigation.navigate('GameDetailScreen', {game});
   };
 
   return (
-    <FlatList
-      data={mockData}
-      renderItem={data => (
-        <TouchableOpacity
-          key={data.index}
-          style={styles.boardList}
-          onPress={() => handleTeamPress(data.item)}>
-          <Image source={logo} />
-          <Text>팀명: {data.item.team_name}</Text>
-          <Text>MMR: {data.item.MMR}</Text>
-        </TouchableOpacity>
-      )}
-    />
+    <View>
+      <FlatList
+        data={mockData}
+        renderItem={data => (
+          <TouchableOpacity
+            key={data.index}
+            style={styles.boardList}
+            onPress={() => handleTeamPress(data.item)}>
+            <Image source={logo} />
+            <Text>팀명: {data.item.team_name}</Text>
+            <Text>MMR: {data.item.MMR}</Text>
+          </TouchableOpacity>
+        )}
+      />
+      <View style={styles.buttonList}>
+        <Pressable
+          style={styles.floattingButton}
+          onPress={gameMakeConfirmModal.show}>
+          <MaterialIcons name="add" color={colors.WHITE} size={25} />
+        </Pressable>
+        <GameMakeConfirmModal
+          isVisible={gameMakeConfirmModal.isVisible}
+          close={gameMakeConfirmModal.hide}
+        />
+      </View>
+    </View>
   );
 }
 
@@ -200,6 +202,24 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  buttonList: {
+    position: 'absolute',
+    bottom: 30,
+    right: 15,
+  },
+  floattingButton: {
+    backgroundColor: colors.PURPLE_700,
+    marginVertical: 5,
+    height: 60,
+    width: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 40,
+    shadowColor: colors.UNCHANGE_BLACK,
+    shadowOffset: {width: 1, height: 2},
+    shadowOpacity: 0.5,
+    elevation: 2,
+  },
 });
 
-export default HomeScreen;
+export default GameScreen;
