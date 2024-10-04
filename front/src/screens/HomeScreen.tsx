@@ -16,6 +16,7 @@ import {
 import ScrollView = Animated.ScrollView;
 import * as url from 'node:url';
 import {StyleSheet} from 'react-native';
+import {FlatList} from 'react-native';
 // import MatchScreen from '@/screens/auth/MatchScreen';
 
 type Game = {
@@ -161,18 +162,19 @@ function HomeScreen() {
   };
 
   return (
-    <ScrollView>
-      {mockData.map((item: Game, index: number) => (
+    <FlatList
+      data={mockData}
+      renderItem={data => (
         <TouchableOpacity
-          key={index}
+          key={data.index}
           style={styles.boardList}
-          onPress={() => handleTeamPress(item)}>
+          onPress={() => handleTeamPress(data.item)}>
           <Image source={logo} />
-          <Text>팀명: {item.team_name}</Text>
-          <Text>MMR: {item.MMR}</Text>
+          <Text>팀명: {data.item.team_name}</Text>
+          <Text>MMR: {data.item.MMR}</Text>
         </TouchableOpacity>
-      ))}
-    </ScrollView>
+      )}
+    />
   );
 }
 
