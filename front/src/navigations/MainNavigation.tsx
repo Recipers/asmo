@@ -19,19 +19,12 @@ import CreateTeamScreen from '@/screens/team/CreateTeamScreen';
 import SearchTeamScreen from '@/screens/team/SearchTeamScreen';
 import GameMakeScreen from '@/screens/Game/GameMakeScreen';
 import TeamDetailScreen from '@/screens/team/TeamDetailScreen';
+import CalendarScreen from '../screens/CalendarScreen';
 
 function UserScreen() {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>내 정보 스크린!</Text>
-    </View>
-  );
-}
-
-function CalendarScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>캘린더 스크린!</Text>
     </View>
   );
 }
