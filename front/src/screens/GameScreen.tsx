@@ -4,7 +4,7 @@ import {Image, Text, View} from 'react-native';
 import {colors} from '@/constants';
 import {FlatList} from 'react-native';
 import {StyleSheet, TouchableOpacity, Pressable} from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Feather from 'react-native-vector-icons/Feather';
 import useModal from '@/hooks/useModal';
 import GameMakeConfirmModal from '@/screens/Game/GameMakeConfirmModal';
 
@@ -169,7 +169,7 @@ function GameScreen() {
         <Pressable
           style={styles.floattingButton}
           onPress={gameMakeConfirmModal.show}>
-          <MaterialIcons name="add" color={colors.WHITE} size={25} />
+          <Feather name="plus" color={colors.WHITE} size={25} />
         </Pressable>
         <GameMakeConfirmModal
           isVisible={gameMakeConfirmModal.isVisible}
@@ -210,8 +210,8 @@ const styles = StyleSheet.create({
   floattingButton: {
     backgroundColor: colors.PURPLE_700,
     marginVertical: 5,
-    height: 60,
-    width: 60,
+    height: 55,
+    width: 55,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 40,
@@ -219,6 +219,13 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 1, height: 2},
     shadowOpacity: 0.5,
     elevation: 2,
+    flexDirection: 'row', // 아이콘과 텍스트를 한 줄로 배치
+    paddingHorizontal: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    marginLeft: 10, // 아이콘과 텍스트 사이의 간격
+    fontSize: 16,
   },
 });
 
